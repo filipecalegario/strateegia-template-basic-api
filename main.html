@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+  </script>
+    <title>Main</title>
+  </head>
+  <body>
+
+    <div class="container p-3">
+      lista de projetos
+      <div class="d-flex flex-wrap" id="projects-container">
+        <select class="form-select" aria-label="Default select example" id="projects-list"></select>
+      </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+
+    <script type="module" src="./js/login.js"></script>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src="./js/strateegia-api.js"></script>
+    <script src="./js/project-list.js"></script>
+    <script>
+      const access_token = localStorage.getItem("strateegia_api_token");
+      if(access_token == 'undefined') {
+        console.log("No access token");
+        window.alert("Authentication failed: No access token");
+      } else {
+        console.log(access_token);
+        initializeProjectList(access_token);
+      }
+    </script>
+
+
+  </body>
+</html>
