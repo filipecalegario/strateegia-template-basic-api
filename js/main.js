@@ -1,4 +1,7 @@
-const accessToken = localStorage.getItem("strateegia_api_token");
+import { initializeProjectList } from "./project-list.js";
+import { getUser } from "./strateegia-api.js";
+
+const accessToken = localStorage.getItem("strateegiaAccessToken");
 
 if (accessToken == 'undefined') {
     console.log("No access token");
@@ -7,7 +10,7 @@ if (accessToken == 'undefined') {
     console.log(accessToken);
     initializeProjectList(accessToken);
     getUser(accessToken).then((user) => {
-        localStorage.setItem("user_id", user.id);
+        localStorage.setItem("userId", user.id);
     });
 }
 

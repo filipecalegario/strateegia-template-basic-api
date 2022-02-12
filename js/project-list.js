@@ -1,6 +1,9 @@
-let users = [];
+import { getAllProjects, getProjectById, getAllDivergencePointsByMapId } from "./strateegia-api.js";
 
-async function initializeProjectList() {
+let users = [];
+const accessToken = localStorage.getItem("strateegiaAccessToken");
+
+export async function initializeProjectList() {
     const labs = await getAllProjects(accessToken)
     console.log("getAllProjects()");
     console.log(labs);
