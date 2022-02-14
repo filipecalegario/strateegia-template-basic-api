@@ -21,6 +21,11 @@
     <div class="d-flex flex-wrap" id="projects-container">
       projects: <select class="form-select" aria-label="Default select example" id="projects-list"></select>
       maps: <select class="form-select" aria-label="Default select example" id="maps-list"></select>
+      kits: <select class="form-select" aria-label="Default select example" id="divpoints-list"></select>
+    </div>
+    <br>
+    <div class="d-flex flex-row-reverse">
+      <button type="button" class="btn btn-secondary btn-sm" id="main-button">Button</button>
     </div>
 
   </div>
@@ -29,10 +34,15 @@
     integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
     crossorigin="anonymous"></script>
 
+  <script type="module" src="./js/main.js"></script>
   <script src="https://d3js.org/d3.v6.min.js"></script>
   <script type="module" src="./js/strateegia-api.js"></script>
   <script type="module" src="./js/project-list.js"></script>
-  <script type="module" src="./js/main.js"></script>
+  <script type="module" src="https://cdn.jsdelivr.net/npm/jsonpath-plus@6.0.1/src/jsonpath.js"></script>
+  <script type="module" src="./js/metrics.js"></script>
+  <script type="module" src="./js/utils/d3functions.js"></script>
+  <script src="./js/utils/jsonpath-browser-umd.cjs"></script>
+  <script src="./js/utils/utils.js"></script>
 
 </body>
 

@@ -1,4 +1,4 @@
-import { getAllProjects, getProjectById, getAllDivergencePointsByMapId } from "./strateegia-api.js";
+import { getAllProjects, getProjectById, getAllDivergencePointsByMapId, getCommentsGroupedByQuestionReport } from "./strateegia-api.js";
 
 let users = [];
 const accessToken = localStorage.getItem("strateegiaAccessToken");
@@ -15,7 +15,6 @@ export async function initializeProjectList() {
         }
         for (let j = 0; j < currentLab.projects.length; j++) {
             const project = currentLab.projects[j];
-            console.log(`${currentLab.lab.name} -> ${project.title}`);
             const newProject = {
                 "id": project.id,
                 "title": project.title,
@@ -25,25 +24,19 @@ export async function initializeProjectList() {
             listProjects.push(newProject);
         }
     }
-    // Using d3 to create the list of projects
-    let options = d3.select("#projects-list")
-        .on("change", () => {
-            // Print the selected project id
-            let selectedProject = d3.select("#projects-list").property('value');
-            localStorage.setItem("selectedProject", selectedProject);
-            updateMapList(selectedProject);
-            console.log(selectedProject);
-        })
-        .selectAll("option")
-        .data(listProjects, d => d.id);
-    options.enter()
-        .append("option")
-        .attr("value", (d) => { return d.id })
-        .text((d) => { return `${d.lab_title} -> ${d.title}` });
-    options.append("option")
-        .attr("value", (d) => { return d.id })
-        .text((d) => { return `${d.lab_title} -> ${d.title}` });
-    options.exit().remove();
+
+    let options = d3.select("#projects-list");
+    options.selectAll('option').remove();
+    listProjects.forEach(function (project) {
+        options.append('option').attr('value', project.id).text(`${project.lab_title} -> ${project.title}`);
+    });
+    options.on("change", () => {
+        let selectedProject = d3.select("#projects-list").property('value');
+        localStorage.setItem("selectedProject", selectedProject);
+        console.log(selectedProject);
+        updateMapList(selectedProject);
+    });
+
     localStorage.setItem("selectedProject", listProjects[0].id);
     updateMapList(listProjects[0].id);
 }
@@ -56,26 +49,56 @@ async function updateMapList(selectedProject) {
     project.users.forEach(user => {
         users.push({ id: user.id, name: user.name });
     });
-    console.log("project.maps");
-    console.log(project.maps);
-    let options = d3.select("#maps-list")
-        .on("change", () => {
-            // Print the selected map id
-            let selectedMap = d3.select("#maps-list").property('value');
-            localStorage.setItem("selectedMap", selectedMap);
-            console.log(selectedMap);
-        })
-        .selectAll("option")
-        .data(project.maps, d => d.id);
-    options.enter()
-        .append("option")
-        .attr("value", (d) => { return d.id })
-        .text((d) => { return d.title });
-    options.append("option")
-        .attr("value", (d) => { return d.id })
-        .text((d) => { return d.title });
-    options.exit().remove();
-    localStorage.setItem("selectedMap", project.maps[0].id);
-    const map = await getAllDivergencePointsByMapId(accessToken, project.maps[0].id);
-    console.log(map.content);
+    
+    localStorage.setItem("users", JSON.stringify(users));
+
+    let options = d3.select("#maps-list");
+    options.selectAll('option').remove();
+    project.maps.forEach(function (map) {
+        options.append('option').attr('value', map.id).text(map.title);
+    });
+    options.on("change", () => {
+        let selectedMap = d3.select("#maps-list").property('value');
+        localStorage.setItem("selectedMap", selectedMap);
+        console.log(selectedMap);
+        updateDivPointList(selectedMap);
+    });
+
+    const mapId = project.maps[0].id;
+    localStorage.setItem("selectedMap", mapId);
+    updateDivPointList(mapId);
+}
+
+async function updateDivPointList(selectedMap) {
+    getAllDivergencePointsByMapId(accessToken, selectedMap).then(map => {
+        console.log("getAllDivergencePointsByMapId()");
+        console.log(map);
+        let options = d3.select("#divpoints-list");
+        options.selectAll("option").remove();
+        if (map.content.length > 0) {
+            map.content.forEach(function (divPoint) {
+                options.append("option").attr("value", divPoint.id).text(divPoint.tool.title);
+            });
+            options.on("change", () => {
+                let selectedDivPoint = d3.select("#divpoints-list").property("value");
+                setSelectedDivPoint(selectedDivPoint);
+            });
+
+            let initialSelectedDivPoint = map.content[0].id;
+            setSelectedDivPoint(initialSelectedDivPoint);
+        } else {
+            console.log("Não há pontos de divergência associados ao mapa selecionado");
+        }
+    });
+}
+
+async function setSelectedDivPoint(divPointId) {
+    localStorage.setItem("selectedDivPoint", divPointId);
+    const questions = await getCommentsGroupedByQuestionReport(accessToken, divPointId);
+    
+    if (questions.length > 0) {
+        console.log(questions);
+    } else {
+        console.log("Não há respostas associadas ao ponto de divergência selecionado");
+    }
 }

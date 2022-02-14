@@ -32,9 +32,9 @@ export async function getAllProjects(token) {
     return data;
 }
 
-export async function getProjectById(token, project_id) {
+export async function getProjectById(token, projectId) {
 
-    const response = await fetch(`${API_URL_PROJECTS}project/${project_id}`, {
+    const response = await fetch(`${API_URL_PROJECTS}project/${projectId}`, {
         method: 'get',
         headers: {
             'Content-Type': 'application/json',
@@ -47,9 +47,9 @@ export async function getProjectById(token, project_id) {
     return data;
 }
 
-export async function getAllDivergencePointsByMapId(token, map_id) {
+export async function getAllDivergencePointsByMapId(token, mapId) {
 
-    const response = await fetch(`${API_URL_PROJECTS}map/${map_id}/divergence-point?size=5000`, {
+    const response = await fetch(`${API_URL_PROJECTS}map/${mapId}/divergence-point?size=5000`, {
         method: 'get',
         headers: {
             'Content-Type': 'application/json',
@@ -62,9 +62,9 @@ export async function getAllDivergencePointsByMapId(token, map_id) {
     return data;
 }
 
-export async function getMapById(token, map_id) {
+export async function getMapById(token, mapId) {
 
-    const response = await fetch(`${API_URL_PROJECTS}map/${map_id}`, {
+    const response = await fetch(`${API_URL_PROJECTS}map/${mapId}`, {
         method: 'get',
         headers: {
             'Content-Type': 'application/json',
@@ -77,9 +77,9 @@ export async function getMapById(token, map_id) {
     return data;
 }
 
-export async function getDivergencePointById(token, content_id) {
+export async function getDivergencePointById(token, contentId) {
 
-    const response = await fetch(`${API_URL_PROJECTS}divergence-point/${content_id}`, {
+    const response = await fetch(`${API_URL_PROJECTS}divergence-point/${contentId}`, {
         method: 'get',
         headers: {
             'Content-Type': 'application/json',
@@ -92,9 +92,9 @@ export async function getDivergencePointById(token, content_id) {
     return data;
 }
 
-export async function getParentComments(token, content_id, question_id) {
+export async function getParentComments(token, contentId, questionId) {
 
-    const response = await fetch(`${API_URL_PROJECTS}divergence-point/${content_id}/question/${question_id}/comment?size=5000`, {
+    const response = await fetch(`${API_URL_PROJECTS}divergence-point/${contentId}/question/${questionId}/comment?size=5000`, {
         method: 'get',
         headers: {
             'Content-Type': 'application/json',
@@ -107,9 +107,9 @@ export async function getParentComments(token, content_id, question_id) {
     return data;
 }
 
-export async function getCommentsGroupedByQuestionReport(token, content_id) {
+export async function getCommentsGroupedByQuestionReport(token, divPointId) {
 
-    const response = await fetch(`${API_URL_PROJECTS}divergence-point/${content_id}/comment/report?size=5000`, {
+    const response = await fetch(`${API_URL_PROJECTS}divergence-point/${divPointId}/comment/report?size=5000`, {
         method: 'get',
         headers: {
             'Content-Type': 'application/json',
