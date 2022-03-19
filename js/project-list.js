@@ -1,4 +1,4 @@
-import { getAllProjects, getProjectById, getAllDivergencePointsByMapId, getCommentsGroupedByQuestionReport } from "./strateegia-api.js";
+import { getAllProjects, getProjectById, getAllDivergencePointsByMapId, getCommentsGroupedByQuestionReport } from "https://unpkg.com/strateegia-api/strateegia-api.js";
 
 let users = [];
 const accessToken = localStorage.getItem("strateegiaAccessToken");

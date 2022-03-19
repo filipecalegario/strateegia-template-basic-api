@@ -1,5 +1,5 @@
 import { initializeProjectList } from "./project-list.js";
-import { getUser } from "./strateegia-api.js";
+import { getUser } from "https://unpkg.com/strateegia-api/strateegia-api.js";
 
 const accessToken = localStorage.getItem("strateegiaAccessToken");
 

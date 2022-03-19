@@ -1,4 +1,4 @@
-import { auth } from "./strateegia-api.js";
+import { auth } from "https://unpkg.com/strateegia-api/strateegia-api.js";
 
 function login() {
     const btnLogin = document.getElementById("btnLogin");
