@@ -14,4 +14,9 @@ if (accessToken == 'undefined') {
     });
 }
 
+const botao = d3.select("#main-button");
+botao.on("click", () => {
+    console.log("clicked");
+});
+
 

@@ -9,6 +9,8 @@
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+  <link rel="icon"
+    href="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/samsung/320/bookmark-tabs_1f4d1.png">
   </script>
   <title>Basic Template</title>
 </head>
@@ -16,19 +18,34 @@
 <body>
   <div class="container p-3">
     <a href="index.html">logout</a>
-    <br>
-    lista de jornadas
-    <div class="d-flex flex-wrap" id="projects-container">
-      jornadas: <select class="form-select" aria-label="Default select example" id="projects-list"></select>
-      mapas: <select class="form-select" aria-label="Default select example" id="maps-list"></select>
-      pontos de divergência: <select class="form-select" aria-label="Default select example"
-        id="divpoints-list"></select>
+  </div>
+  <div class="container mt-2">
+    <div class="row input-group mb-2">
+      <span class="col-3 input-group-text">jornada</span>
+      <select class="col-10 form-select" aria-label="Default select example" id="projects-list"></select>
     </div>
-    <br>
-    <div class="d-flex flex-row-reverse">
-      <button type="button" class="btn btn-secondary btn-sm" id="main-button">botão</button>
+    <div class="row input-group mb-2">
+      <span class="col-3 input-group-text">mapas</span>
+      <select class="col-10 form-select" aria-label="Default select example" id="maps-list"></select>
     </div>
-
+    <div class="row input-group mb-2">
+      <span class="col-3 input-group-text">pontos de divergência</span>
+      <select class="col-10 form-select" aria-label="Default select example" id="divpoints-list"></select>
+    </div>
+    <div class="row input-group mb-2">
+      <textarea class="form-control" id="main-textarea" rows="10"></textarea>
+    </div>
+    <div class="row input-group mb-2">
+      <div class="d-flex justify-content-end p-0">
+        <button type="button" class="btn btn-secondary btn-sm" id="main-button">botão</button>
+      </div>
+    </div>
+    <div class="row input-group mb-2">
+      <table id="table-body">
+        <thead></thead>
+        <tbody></tbody>
+      </table>
+    </div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
@@ -37,7 +54,7 @@
 
   <script type="module" src="./js/main.js"></script>
   <script src="https://d3js.org/d3.v6.min.js"></script>
-  <script type="module" src="https://unpkg.com/strateegia-api@0.0.1/strateegia-api.js"></script>
+  <script type="module" src="https://unpkg.com/strateegia-api/strateegia-api.js"></script>
   <script type="module" src="./js/project-list.js"></script>
   <script type="module" src="https://cdn.jsdelivr.net/npm/jsonpath-plus@6.0.1/src/jsonpath.js"></script>
   <script type="module" src="./js/utils/d3functions.js"></script>
