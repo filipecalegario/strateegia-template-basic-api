@@ -21,6 +21,9 @@
   </div>
   <div class="container mt-2">
     <div class="row input-group mb-2">
+      <h3>[título do applet]</h3>
+    </div>
+    <div class="row input-group mb-2">
       <span class="col-3 input-group-text">jornada</span>
       <select class="col-10 form-select" aria-label="Default select example" id="projects-list"></select>
     </div>
@@ -31,6 +34,16 @@
     <div class="row input-group mb-2">
       <span class="col-3 input-group-text">pontos de divergência</span>
       <select class="col-10 form-select" aria-label="Default select example" id="divpoints-list"></select>
+    </div>
+    <div class="row input-group mb-2">
+      <div class="d-flex justify-content-end p-0">
+        <div>
+          <button type="button" class="btn btn-secondary btn-sm" onclick="exportTableAsCsv('table-body', ',')"
+            id="export-csv">csv</button>
+          <button type="button" class="btn btn-secondary btn-sm" onclick="exportJson('table-body')"
+            id="export-csv">json</button>
+        </div>
+      </div>
     </div>
     <div class="row input-group mb-2">
       <textarea class="form-control" id="main-textarea" rows="10"></textarea>
